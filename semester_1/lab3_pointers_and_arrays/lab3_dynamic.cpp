@@ -43,6 +43,7 @@ void fill_Arr(int* arr, int n) {
         }
     } else {
         std::cout << "Неверный выбор! Программа завершена.\n";
+        delete[] arr;
         exit(1);
     }
 }
@@ -74,14 +75,13 @@ int findMinElementABS(int* arr, int n) {
 int sumBeforeLastZero(int* arr, int n) {
     int lastZeroIndex = -1;
     
-    
     for (int i = 0; i < n; i++) {
         if (arr[i] == 0) {
             lastZeroIndex = i;
         }
     }
     
-    
+    // throw catch
     if (lastZeroIndex == -1) {
         std::cout << "В массиве нет нулевых элементов " << std::endl;
         return 0;
@@ -97,32 +97,22 @@ int sumBeforeLastZero(int* arr, int n) {
 }
 
 void resultArr(int* arr, int n) {
-    int* temp = new int[n];
-    int index = 0;  
-    
-    
-    for (int i = 0; i < n; i++) {
-        if (i % 3 == 0) {  
-            temp[index] = arr[i];
-            index++;
+ int position = 0;
+  for (int number = 1; number <= n; number++) {
+        if (number % 3 == 0) {
+             int currentIndex = number - 1;
+            if (currentIndex != position) {
+                int temp = arr[currentIndex];
+                
+                for (int j = currentIndex; j > position; j--) {
+                    arr[j] = arr[j - 1];
+                }
+                
+                arr[position] = temp;
+            }
+            position++;
         }
     }
-    
-    
-    for (int i = 0; i < n; i++) {
-        if (i % 3 != 0) {  
-            temp[index] = arr[i];
-            index++;
-        }
-    }
-    
-    
-    for (int i = 0; i < n; i++) {
-        arr[i] = temp[i];
-    }
-    
-    
-    delete[] temp;
 }
 
 int main() {
