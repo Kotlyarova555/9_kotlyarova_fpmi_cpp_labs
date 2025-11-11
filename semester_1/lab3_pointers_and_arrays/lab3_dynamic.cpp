@@ -99,18 +99,18 @@ int sumBeforeLastZero(int* arr, int n) {
 void resultArr(int* arr, int n) {
  int position = 0;
   for (int number = 1; number <= n; number++) {
-        if (number % 3 == 0) {
-             int currentIndex = number - 1;
-            if (currentIndex != position) {
-                int temp = arr[currentIndex];
+   if (number % 3 == 0) {
+    int currentIndex = number - 1;
+     if (currentIndex != position) {
+        int temp = arr[currentIndex];
                 
-                for (int j = currentIndex; j > position; j--) {
-                    arr[j] = arr[j - 1];
-                }
+        for (int j = currentIndex; j > position; j--) {
+            arr[j] = arr[j - 1];
+         }
                 
-                arr[position] = temp;
-            }
-            position++;
+        arr[position] = temp;
+        }
+position++;
         }
     }
 }
